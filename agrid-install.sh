@@ -102,11 +102,11 @@ AGRID_SERVER=${AGRID_SERVER:=}
 [[ "$OSTYPE" != "linux-gnu"* ]] && echo "Agrid must be run on Linux OS" && exit
 
 main(){
-    # echo ">> Installing binaries"
-    # binary_install
-    # echo ">> Installing docker"
-    # docker_install
-    # echo ">> Fetching data"
+    echo ">> Installing binaries"
+    binary_install
+    echo ">> Installing docker"
+    docker_install
+    echo ">> Fetching data"
     fetch_config & PID=$!
     spin $PID
     
@@ -114,11 +114,11 @@ main(){
     # IF AGRID_SERVER variable is met, a few adjustments must be done
     #
     
-    # if [[ "$AGRID_SERVER" == "1"* ]]; then
-    #     echo ">> Agrid special setup"
-    #     agrid_server & PID=$!
-    #     spin $PID
-    # fi
+    if [[ "$AGRID_SERVER" == "1"* ]]; then
+        echo ">> Agrid special setup"
+        agrid_server & PID=$!
+        spin $PID
+    fi
 }
 
 echo "
