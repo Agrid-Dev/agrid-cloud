@@ -28,7 +28,7 @@ binary_install(){
 docker_install(){
     sudo apt-get -y update
     sudo apt-get -y upgrade
-    sudo apt install docker.io
+    sudo apt install -y docker.io
     systemctl start docker
     systemctl enable docker
     sudo groupadd docker
@@ -61,8 +61,8 @@ agrid_server() {
 }
 
 fetch_config() {
-    machineId=$(cat /etc/machine-id)
-    url="$AGRID_API_URL/$machineId/$AGRID_API_KEY"
+    MACHINE_ID=$(cat /etc/machine-id)
+    url="$AGRID_API_URL/$MACHINE_ID/$AGRID_API_KEY"
     echo $url
     http_code=$(curl $url -LO -w "%{http_code}")
     x=1
@@ -106,9 +106,6 @@ main(){
     binary_install
     echo ">> Installing docker"
     docker_install
-    echo ">> Fetching data"
-    fetch_config & PID=$!
-    spin $PID
     
     #
     # IF AGRID_SERVER variable is met, a few adjustments must be done
@@ -119,6 +116,10 @@ main(){
         agrid_server & PID=$!
         spin $PID
     fi
+    
+    echo ">> Fetching data"
+    fetch_config & PID=$!
+    spin $PID
 }
 
 echo "
@@ -131,3 +132,5 @@ echo "
 "
 main
 exit
+
+
