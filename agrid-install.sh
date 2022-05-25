@@ -102,6 +102,7 @@ AGRID_SERVER=${AGRID_SERVER:=}
 [[ "$OSTYPE" != "linux-gnu"* ]] && echo "Agrid must be run on Linux OS" && exit
 
 main(){
+    cd /tmp
     echo ">> Installing binaries"
     binary_install
     echo ">> Installing docker"
