@@ -39,25 +39,8 @@ docker_install(){
 
 agrid_server() {
     hostnamectl set-hostname agrid
-    touch /etc/modprobe.d/blacklist-axp288.conf
-    echo "blacklist axp288_fuel_gauge" > /etc/modprobe.d/blacklist-axp288.conf
-    sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
-    # https://askubuntu.com/questions/1190217/using-syslog-to-diagnose-a-crash
-    if [ "$(grep GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub)" != 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_idle.max_cstate=1"' ]; then
-        grep -v "GRUB_CMDLINE_LINUX_DEFAULT" /etc/default/grub > tmpfile && mv tmpfile /etc/default/grub
-        echo 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_idle.max_cstate=1"' >> /etc/default/grub
-        sudo update-grub
-    fi
     sudo apt-get install nmap -y
     sudo apt-get install -y net-tools
-    sudo sysctl kernel.panic=60
-    sudo sysctl kernel.softlockup_panic=1
-    if [ "$(grep kernel.panic /etc/sysctl.conf)" != "kernel.panic=60" ]; then
-        echo "kernel.panic=60" >> /etc/sysctl.conf
-    fi
-    if [ "$(grep kernel.softlockup_panic /etc/sysctl.conf)" != "kernel.softlockup_panic=1" ]; then
-        echo "kernel.softlockup_panic=1" >> /etc/sysctl.conf
-    fi
 }
 
 fetch_config() {
