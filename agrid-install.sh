@@ -40,8 +40,8 @@ docker_install(){
 
 agrid_server() {
     hostnamectl set-hostname agrid
-    sudo apt-get install nmap -y
-    sudo apt-get install -y net-tools
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nmap
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y net-tools
 }
 
 fetch_config() {
