@@ -27,8 +27,8 @@ binary_install(){
 }
 
 docker_install(){
-    sudo apt-get -y update
-    sudo apt-get -y upgrade
+    sudo DEBIAN_FRONTEND=noninteractive apt-get -y update
+    sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker.io
     systemctl start docker
     systemctl enable docker
