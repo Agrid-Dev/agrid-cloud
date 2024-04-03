@@ -20,9 +20,10 @@ spin() {
 }
 
 binary_install(){
-    sudo apt install -y curl
-    sudo apt install -y autossh
-    sudo apt-get install -y unzip
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y curl
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y autossh
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y unzip
+
 }
 
 docker_install(){
