@@ -29,7 +29,7 @@ binary_install(){
 docker_install(){
     sudo apt-get -y update
     sudo apt-get -y upgrade
-    sudo apt install -y docker.io
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker.io
     systemctl start docker
     systemctl enable docker
     sudo groupadd docker
