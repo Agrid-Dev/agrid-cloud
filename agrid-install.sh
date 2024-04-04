@@ -20,6 +20,10 @@ spin() {
 }
 
 binary_install(){
+    echo "** binary_install **"
+    sudo DEBIAN_FRONTEND=noninteractive dpkg --configure -a --force-confdef --force-confold
+    sudo DEBIAN_FRONTEND=noninteractive apt-get -y update
+    sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y curl
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y autossh
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y unzip
@@ -27,8 +31,7 @@ binary_install(){
 }
 
 docker_install(){
-    sudo DEBIAN_FRONTEND=noninteractive apt-get -y update
-    sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
+    echo "** docker_install **"
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker.io
     systemctl start docker
     systemctl enable docker
@@ -40,12 +43,14 @@ docker_install(){
 }
 
 agrid_server() {
+    echo "** agrid_server **"
     hostnamectl set-hostname agrid
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nmap
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y net-tools
 }
 
 fetch_config() {
+    echo "** fetch_config **"
     MACHINE_ID=$(cat /etc/machine-id)
     url="$AGRID_API_URL/$MACHINE_ID/$AGRID_API_KEY"
     echo $url
