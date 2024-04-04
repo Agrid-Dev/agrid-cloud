@@ -23,7 +23,7 @@ binary_install(){
     echo "** binary_install **"
     sudo DEBIAN_FRONTEND=noninteractive dpkg --configure -a --force-confdef --force-confold
     sudo DEBIAN_FRONTEND=noninteractive apt-get -y update
-    sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
+    sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade --assume-yes --option "Dpkg::Options::=--force-confdef" --option "Dpkg::Options::=--force-confold"
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y curl
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y autossh
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y unzip
