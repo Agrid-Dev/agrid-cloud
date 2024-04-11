@@ -33,6 +33,7 @@ EOF
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y curl
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y autossh
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y unzip
+    sudo DEBIAN_FRONTEND=noninteractive sudo apt-get install network-manager
 
 }
 
